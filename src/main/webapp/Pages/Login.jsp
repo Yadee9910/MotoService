@@ -13,7 +13,7 @@
 <div class="login-container">
 	<h1><span>Moto</span>Service</h1>
 	<img class="login_img" src="../Images/MotoLogo.jpg">
- 	<p class="login_p1">Login into your account</p>
+ 	<p class="login_p1">Login into your Account</p>
  
  	<button class="login_btn" type="button">SIGN IN</button>
  	
@@ -25,3 +25,4 @@
 </div>
 </body>
 </html>
+     
