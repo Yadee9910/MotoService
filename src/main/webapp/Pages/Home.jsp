@@ -8,15 +8,7 @@
 </head>
 <body>
 
-<nav>
-    <a href="Home.jsp" class="Motologo"><span>Moto</span>Service</a>
-    <ul class="navbar">
-        <li><a href="Home.jsp" class="active"><i class="fas fa-home"></i></a></li>
-        <li><a href="Service.jsp"><i class="fas fa-taxi"></i></a></li>
-        <li><a href="Reservationlist.jsp"><i class="fas fa-list"></i></a></li>
-        <li><a href="UserProfile.jsp"><i class="fas fa-user"></i></a></li>
-    </ul>
-</nav>
+<%@ include file="Navbar.jsp" %>
 
 </body>
 </html>
