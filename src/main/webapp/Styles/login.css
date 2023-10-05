@@ -45,6 +45,7 @@
 	color: white;
 	border-style:none;
 	margin-bottom: 7%;
+	cursor:pointer;
 }
 .signup{
 	font-size: 17px;
@@ -55,4 +56,9 @@
 	color: white;
 	border-style:none;
 	margin-bottom: 7%;
+	cursor: pointer;
+}
+.signup_link{
+	text-decoration: none;
+	list-style: none;
 }

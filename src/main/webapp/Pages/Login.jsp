@@ -15,10 +15,11 @@
 	<img class="login_img" src="../Images/MotoLogo.jpg">
  	<p class="login_p1">Login into your Account</p>
  
- 	<button class="login_btn" type="button">SIGN IN</button>
+ 	<button class="login_btn" type="button" 
+ 	onclick ="window.location.href ='https://api.asgardeo.io/t/motoservice/oauth2/authorize?scope=openid&response_type=code&redirect_uri=http://localhost:8080/MotoService_VehicleReservation/Authorize.jsp&client_id=3AKTbfxHDmCuPCBjH7PdOQlKQrMa&login_hint=syadeeshani@gmail.com'">SIGN IN</button>
  	
  	<p class="login_p1"> Don't have an Account?</p>
- 	<button class="signup" type="button">CREATE</button>
+ 	<button class="signup" type="button" onclick="window.location.href ='https://console.asgardeo.io/'" >CREATE</button>
 
 </div>
  	
