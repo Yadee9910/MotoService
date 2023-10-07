@@ -1,0 +1,17 @@
+@charset "ISO-8859-1";
+
+.profile_img{
+	background-color: linen;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-top:6%;
+	
+}
+.profile_img i{
+	font-size: 180px;
+	padding-top: 1rem;
+	padding-bottom: 1rem;    
+	
+}
