@@ -36,10 +36,11 @@
                 var phone = response.phone_number;
                 var email = response.email;               
                 var country = response.address.country;
-                var name = response.name;
+                
+                var fullName = given_name + " " + family_name;
                 
                 document.getElementById('username').textContent = username;
-                document.getElementById('name').textContent = name;
+                document.getElementById('name').textContent = fullName;
                 document.getElementById('given_name').textContent = given_name;
                 document.getElementById('family_name').textContent = family_name;
                 document.getElementById('email').textContent = email;
@@ -68,19 +69,24 @@
 
     <div class="profile_img">
         <i class="fas fa-user-circle"></i>
+        <span class="prof_name" id = 'name'></span>
     </div>
 
- 
-  <ul>
-  <li>First Name : <span id = 'given_name'></span></li>
-  <li>Last Name : <span id = 'family_name'></span></li>
-  <li>User Name : <span id = 'username'></span></li>
-  <li>Contact: <span id = 'phone'></span></li>
-   <li>Email: <span id = 'email'></span></li>
-   <li>Country : <span id = 'address'></span></li>
-  <li>Full Name: <span id = 'name'></span></li>
+  <div class="profile_container">
   
+  <ul>
+      
+    <li><span class="profli">First Name&emsp;&nbsp;: </span><span class="prof_li" id="given_name"></span></li>
+    <li><span class="profli">Last Name&emsp;&nbsp; : </span><span class="prof_li" id="family_name"></span></li>
+    <li><span class="profli">User Name&emsp;&nbsp; : </span><span class="prof_li" id="username"></span></li>
+    <li><span class="profli">Email &emsp;&emsp; &emsp; : </span><span class="prof_li" id="email"></span></li>
+    <li><span class="profli">Country &emsp;&emsp; : </span><span class="prof_li" id="address"></span></li>
+    <li><span class="profli">Contact&emsp; &emsp;&nbsp; : </span><span class="prof_li" id="phone"></span></li>
+
   </ul>
     
+  
+  </div>
+  
 </body>
 </html>
