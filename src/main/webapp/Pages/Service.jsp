@@ -1,10 +1,78 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.*, java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="com.database.*" %>
+	
+<%
+      MotoservicesDAO motoservicesDAO = new MotoservicesDAO();
+		String dbUrl = "jdbc:mysql://51.132.137.223:3306/isec_assessment2";
+		String dbUser = "isec";
+		String dbPassword = "EUHHaYAmtzbv";
+		ResultSet pastResultSet = null;
+		ResultSet futureResultSet = null;
+		
+		try {
+		    // Load the MySQL JDBC driver
+		    Class.forName("com.mysql.cj.jdbc.Driver");
+		    
+		    // Establish a database connection
+		    Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+		    
+		    
+		    
+			
+
+		    if (request.getParameter("submit") != null) {
+		        String location = request.getParameter("location");
+		        String mileageStr = request.getParameter("mileage");
+		        String vehicle_no = request.getParameter("vehicle");
+		        String message = request.getParameter("message");
+		        String userName = request.getParameter("username01");
+		        String dateStr = request.getParameter("date");
+		        String timeStr = request.getParameter("time");
+		    	
+				System.out.println("Username: " + userName);
+			    System.out.println("location: " + location);
+			    System.out.println("Mileage: " + mileageStr);
+			    System.out.println("Message: " + message);
+			    System.out.println("Vehicle No: " + vehicle_no) ;
+			    
+			    
+
+		        // Convert mileage to an integer
+		        int rowsInserted =  motoservicesDAO.insertService(location,  mileageStr, vehicle_no,  message,  userName,  dateStr,  timeStr, conn);
+		        if (rowsInserted > 0) {
+		         	out.println("Data inserted successfully.");
+		             response.sendRedirect(request.getRequestURI());
+		             
+		         }else if(rowsInserted == -1){
+		        	 out.println("Invalid time format. Please enter time in hh:mm format.");
+		         }
+		         else if(rowsInserted == -2){
+		        	 out.println("Error parsing time");
+		        	 	   
+		         }
+		        
+		        else {
+		        	 out.println("Failed to insert data.");
+		         }
+		         
+		    }
+        
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			
+			}
+		
+    %>
+			
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link rel="stylesheet"  href ="../Styles/service.css">
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>MotoService_Service</title>
@@ -14,33 +82,34 @@
 <body>
  
 <script type="text/javascript"  src="../JS/moto.js"></script>
-<div class="service_container">
+
+
+<section class="service_container">
 <h1>Register For Service</h1>
 	           
 <form class="service_form" method="post" id="serviceform" name="serviceform">	             	              
-
- <input type="hidden" id="username01" name="username01" value="">
+ <input type="hidden" id="username01" name="username01" value=" ">
  <br>
  
  
 <div class="service_content">
 	  <label for="date" class="serv_select">Date *</label>
   	  &emsp;&emsp;&emsp;&emsp;&nbsp;
-  	  <input type="date" id="date" name="date" required>
+  	  <input type="date" id="date" name="date" required="required">
 </div>
 <br>  
 
 <div class="service_content">
 	  <label for="time" class="serv_select">Select a time * </label>
   	  &emsp;
-  	  <input type="time" id="time" name="time" required>
+  	  <input type="time" id="time" name="time" required="required">
 </div>
 <br>
 
 <div class="service_content">
     <label for ="location" class="serv_select">Location *</label>
     &emsp;&emsp;&nbsp;&nbsp;
-	<select class="selectcustom" id="location" name="location" title="Please select a location" required >
+	<select class="selectcustom" id="location" name="location" title="Please select a location" required="required">
 				<option selected>Choose...</option>
 			    <option value="Colombo">Colombo</option>
 				<option value="Gampaha">Gampaha</option>
@@ -74,14 +143,7 @@
 <div class="service_content">
 	      <label for="vehicle" class="serv_select">Vehicle *</label>
 	      &emsp;&emsp;&emsp;
-	       <select class="selectcustom" id="vehicle" name="vehicle" title="Please select a vehicle" required >
-				<option selected disabled>Choose...</option>
-				<option value="AAA-001"> Suzuki-WagonR(2015)</option>
-				<option value="ABC-002">Toyota-Prius(2012)</option>
-				<option value="FG-034">Suzuki-Alto(2019)</option>
-				<option value="QA-004">Dolphin(2011) </option>
-				<option value="CAT-005">Honda-Fit(2020) </option>
-		   </select>
+	        <input type="text" class="form-control" name="vehicle" placeholder="vehicle number" required="required">
 </div>
 <br>
 
@@ -89,26 +151,30 @@
 <div class="service_content">
 	<label for="mileage" class="serv_select">Mileage *</label>
 	&emsp;&emsp;&nbsp;&nbsp;&nbsp;
-	<input type="text" class="form-control" name="mileage" id="mileage"  placeholder="Total mileage" required>
+	<input type="text" class="form-control" name="mileage" id="mileage"  placeholder="Total mileage" required="required">
 </div>
 <br>
 	                	            
 <div class="service_content">
 	       <label for="message" class="serv_select">Message *</label>
 	       &emsp;&emsp; &nbsp;
-	       <textarea class="form-control" name="message" rows="3" cols="20" id="message" placeholder="Your message" required></textarea>
+	       <textarea class="form-control" name="message" rows="3" cols="20" id="message" placeholder="Your message" required="required"></textarea>
 </div>
 <br>
 		
 <div class="service_content01">
-	         <input type="submit" value="Submit" id="submit" name="submit" class="service_submit">
-	         <span class="submitting"></span>
+	         <input type="submit" value="submit" id="submit" name="submit" class="service_submit">	         
 </div>
+	    
 	              
 </form>
 	
+</section>
 
-</div>
+<section class="reservation">
+
+
+</section>
 
 	
 </body>
