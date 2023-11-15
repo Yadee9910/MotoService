@@ -3,7 +3,22 @@
 <%@ page import="java.sql.*, java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.database.*" %>
+<%@ page import="java.io.InputStream, java.io.IOException" %>
+<%@ page import="java.util.Properties" %>
 	
+
+			
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript"  src="../JS/moto.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet"  href ="../Styles/service.css">
+ 
+<title>MotoService_Service</title>
 <%
       MotoservicesDAO motoservicesDAO = new MotoservicesDAO();
 		String dbUrl = "jdbc:mysql://51.132.137.223:3306/isec_assessment2";
@@ -19,20 +34,16 @@
 		    // Establish a database connection
 		    Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 		    
-		    
-		    
-			
-
 		    if (request.getParameter("submit") != null) {
 		        String location = request.getParameter("location");
 		        String mileageStr = request.getParameter("mileage");
 		        String vehicle_no = request.getParameter("vehicle");
 		        String message = request.getParameter("message");
-		        String userName = request.getParameter("username01");
+		        String userName = request.getParameter("usernameForStore");
 		        String dateStr = request.getParameter("date");
 		        String timeStr = request.getParameter("time");
-		    	
-				System.out.println("Username: " + userName);
+		        
+		        System.out.println("Username: " + userName);
 			    System.out.println("location: " + location);
 			    System.out.println("Mileage: " + mileageStr);
 			    System.out.println("Message: " + message);
@@ -66,29 +77,17 @@
 			}
 		
     %>
-			
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<link rel="stylesheet"  href ="../Styles/service.css">
- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<title>MotoService_Service</title>
-
 </head>
 <%@ include file="Navbar.jsp" %>
+
 <body>
  
-<script type="text/javascript"  src="../JS/moto.js"></script>
-
-
 <section class="service_container">
 <h1>Register For Service</h1>
 	           
 <form class="service_form" method="post" id="serviceform" name="serviceform">	             	              
- <input type="hidden" id="username01" name="username01" value=" ">
+ <input type="hidden" id="usernameForStore" name="usernameForStore" value="">
+
  <br>
  
  
@@ -143,7 +142,7 @@
 <div class="service_content">
 	      <label for="vehicle" class="serv_select">Vehicle *</label>
 	      &emsp;&emsp;&emsp;
-	        <input type="text" class="form-control" name="vehicle" placeholder="vehicle number" required="required">
+	      <input type="text" class="form-control" name="vehicle" placeholder="vehicle number" required="required">
 </div>
 <br>
 
@@ -176,6 +175,18 @@
 
 </section>
 
-	
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Getting data from localStorage
+        var username = localStorage.getItem('username');
+        console.log('Value retrieved: ' + username);
+
+        document.getElementById('submit').addEventListener('click', function () {
+            console.log("Hello world");
+            document.getElementById('usernameForStore').value = username;
+        });
+    });
+</script>
 </body>
 </html>

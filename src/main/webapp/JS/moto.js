@@ -1,3 +1,8 @@
+       const infoUrl ="https://api.asgardeo.io/t/motoservice/oauth2/userinfo";
+       const client_ID ='3AKTbfxHDmCuPCBjH7PdOQlKQrMa';
+       const client_secret = 'MJrUI5WGgwPfY6zGhc6u1NNfN_vvDVNWKPF7VhfxAmsa';
+       
+       
        const introspectionEndpointUrl = 'https://api.asgardeo.io/t/motoservice/oauth2/introspect ';
         const accessToken = localStorage.getItem('access_token');
         const idToken = localStorage.getItem('id_token');
@@ -5,7 +10,7 @@
         if(accessToken && idToken){
         	
         var settings = {
-            "url": "https://api.asgardeo.io/t/motoservice/oauth2/userinfo",
+            "url":infoUrl,
             "method": "GET",
             "timeout": 0,
             "headers": {
@@ -22,8 +27,10 @@
                 var phone = response.phone_number;
                 var email = response.email;               
                 var country = response.address.country;
-                
                 var fullName = given_name + " " + family_name;
+                
+                localStorage.setItem('username', username);
+                
                 
                 document.getElementById('username').textContent = username;
                 document.getElementById('name').textContent = fullName;
@@ -32,12 +39,9 @@
                 document.getElementById('email').textContent = email;
                 document.getElementById('phone').textContent = phone;
                 document.getElementById('address').textContent = country;
-                
-                
-                document.getElementById('submit').addEventListener('click', function () {            
-                    document.getElementById('username01').value = username;
-                });
-                
+             
+                            
+            
                 
             })
             .fail(function (jqXHR, textStatus, errorThrown) {
@@ -47,6 +51,8 @@
                 cnsole.log(errorThrown)
                 window.location.href = "Login.jsp";
             });
+            
+            console.log(localStorage.getItem('username'));
         }
         else{
         	window.location.href = "Login.jsp";	

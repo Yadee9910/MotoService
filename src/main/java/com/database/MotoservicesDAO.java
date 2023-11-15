@@ -73,6 +73,7 @@ public class MotoservicesDAO {
         }
 
         try {
+        	
             // Create a SQL INSERT statement
             String sql = "INSERT INTO vehicle_service (date, time, location, mileage, vehicle_no, message, username) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
