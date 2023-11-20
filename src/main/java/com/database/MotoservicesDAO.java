@@ -55,22 +55,21 @@ public class MotoservicesDAO {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = dateFormat.parse(dateStr);
 
-        Time time = null;
 
-        try {
-            // Check if the timeStr matches the expected format "hh:mm"
-            if (timeStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
-                // If it matches, add ":00" to the end of the string to match SQL TIME format
-                timeStr += ":00";
-                // Create a Time object
-                time = Time.valueOf(timeStr);
-            } else {
-                // Handle invalid time format
-                return -1;
-            }
-        } catch (IllegalArgumentException e) {
-            return -2;
-        }
+Time time= null;
+        SimpleDateFormat inputFormat = new SimpleDateFormat("hh:mm a");
+
+                try {
+                    // Parse the string to get a java.util.Date object
+                    java.util.Date utilDate = inputFormat.parse(timeStr);
+
+                    // Convert the java.util.Date to java.sql.Time
+                   time = new Time(utilDate.getTime());
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+       
 
         try {
         	
@@ -180,7 +179,7 @@ return pastResultSet;
         
     }  
    
-   /*//deleting the future result set
+   //deleting the future result set
    public int deleteServices(int bookingId) throws ClassNotFoundException {
    	PreparedStatement preparedStatement = null;
 
@@ -212,6 +211,6 @@ return pastResultSet;
    	    e.printStackTrace();
    	    return -1;
    	} 
-   }*/
+   }
    
 }

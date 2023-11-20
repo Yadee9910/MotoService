@@ -49,7 +49,7 @@
 			    System.out.println("Message: " + message);
 			    System.out.println("Vehicle No: " + vehicle_no) ;
 			    
-			    
+
 
 		        // Convert mileage to an integer
 		        int rowsInserted =  motoservicesDAO.insertService(location,  mileageStr, vehicle_no,  message,  userName,  dateStr,  timeStr, conn);
@@ -102,10 +102,10 @@
 	  <label for="time" class="serv_select">Select a time * </label>
   	  &nbsp; &nbsp;
   	  <select id="time" name="time" required="required">
-  	  		  <option selected>Time</option>
+  	  		  	<option selected>Time</option>
   	  		   <option value="10:00 AM">10:00 AM</option>
                <option value="11:00 AM">11:00 AM</option>
-               <option value="12:00 AM">12:00 AM</option>
+               <option value="12:00 AM">12:00 PM</option>
   	  </select>
 </div>
 <br>

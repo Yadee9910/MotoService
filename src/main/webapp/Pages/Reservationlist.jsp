@@ -44,7 +44,7 @@
 		    	
 		    }
 		    
-		   /* if (request.getParameter("delete") != null){
+		   if (request.getParameter("delete") != null){
 		    	
 		    	String bookingId = request.getParameter("bookingID");
 		    	
@@ -65,7 +65,7 @@
 			    }
 		    	
 		    	
-		    } */
+		    } 
 		    
 		}catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -224,7 +224,10 @@
             <td><%= mileage %></td>
             <td><%= vehicleNo %></td>
             <td><%= message %></td>
-            <td><button onclick="document.getElementById('id01').style.display='block';  document.getElementById('bookingID').value = <%= bookingId %>;" class="delete">Delete</button></td>
+            <td><form id="deleteForm" method="post">  
+               <input type="hidden" id="bookingID" name="bookingID" value=<%= bookingId %>>
+        		<input type="submit" class="delete" name="delete" value="Delete" onclick="confirmDelete()">
+    </form></td>
         </tr>
         <% 
             }}
@@ -249,6 +252,12 @@
             document.getElementById('usernameForStore2').value = username;
         });
     });
+    
+    function confirmDelete() {
+        if (confirm("Are you sure you want to delete?")) {
+            document.getElementById('deleteForm').submit();
+        }
+    }
 </script>
 <script type="text/javascript"  src="../js/vehicleservice.js"></script>
 </body>
