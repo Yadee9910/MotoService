@@ -12,11 +12,11 @@ import java.util.Date;
 
 public class MotoservicesDAO {
     // Database connection parameters
-    private static final String dbUrl = "jdbc:mysql://51.132.137.223:3306/isec_assessment2";
-    private static final String dbUser = "isec";
-    private static final String dbPassword = "EUHHaYAmtzbv";
+	 String dbUrl = "jdbc:mysql://172.187.178.153:3306/isec_assessment2";
+     String dbUser = "isec";
+     String dbPassword = "EUHHaYAmtzbv";
 
-    public static void main(String[] args) {
+    /*public void main(String[] args) {
         Connection conn = null;
 
         try {
@@ -45,7 +45,7 @@ public class MotoservicesDAO {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
     
     //inserting data values
 
@@ -104,13 +104,17 @@ public class MotoservicesDAO {
     
 
 //getting the past result set
-public ResultSet getPastServices(String username,Connection conn) {
-	
-	ResultSet pastResultSet = null;
+    public ResultSet getPastServices(String username) throws ClassNotFoundException, SQLException {
+    	
+		ResultSet pastResultSet = null;
 	
 
 try {
-
+	Class.forName("com.mysql.cj.jdbc.Driver");
+	
+	// Establish a database connection
+	Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+	
 // Create a SQL SELECT query for past reservations
 String pastSql = "SELECT * FROM vehicle_service WHERE username = ? AND CONCAT(date, ' ', time) < ? ORDER BY date, time";
 
@@ -126,47 +130,88 @@ pastPreparedStatement.setString(2, currentDateTime);
 // Execute the SELECT queries
 pastResultSet = pastPreparedStatement.executeQuery();
 
-return pastResultSet;
+
 	} catch (SQLException e) {
 	e.printStackTrace();
-	return pastResultSet;
+	
 	}
 
-
+return pastResultSet;
 }
     
 
 
 //getting the future result set
-public ResultSet getFutureServices(String username,Connection conn){
+   public ResultSet getFutureServices(String username) throws ClassNotFoundException, SQLException{
+    	
+		ResultSet futureResultSet = null;
+		Connection conn = null;
+
+	try {
+		 // Load the MySQL JDBC driver
+	    Class.forName("com.mysql.cj.jdbc.Driver");
+	    
+	    // Establish a database connection
+	    conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+	  
+
+
+	    // Create a SQL SELECT query for future reservations
+	    String futureSql = "SELECT * FROM vehicle_service WHERE username = ? AND CONCAT(date, ' ', time) >= ? ORDER BY date, time";
+	    
+	    // Create PreparedStatements for both queries
+	    PreparedStatement futurePreparedStatement = conn.prepareStatement(futureSql);
+	    futurePreparedStatement.setString(1, username);
+	    
+	    // Set the parameter value (current date and time)
+	    SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    String currentDateTime = dateTimeFormat.format(new Date());
+	    futurePreparedStatement.setString(2, currentDateTime);
+	    
+	    // Execute the SELECT queries
+		 futureResultSet = futurePreparedStatement.executeQuery();
+		 
 	
-	ResultSet futureResultSet = null;
-
-try {
-
-    // Create a SQL SELECT query for future reservations
-    String futureSql = "SELECT * FROM vehicle_service WHERE username = ? AND CONCAT(date, ' ', time) >= ? ORDER BY date, time";
-    
-    // Create PreparedStatements for both queries
-    PreparedStatement futurePreparedStatement = conn.prepareStatement(futureSql);
-    futurePreparedStatement.setString(1, username);
-    
-    // Set the parameter value (current date and time)
-    SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    String currentDateTime = dateTimeFormat.format(new Date());
-    futurePreparedStatement.setString(2, currentDateTime);
-    
-    // Execute the SELECT queries
-	 futureResultSet = futurePreparedStatement.executeQuery();
-	
-	 return futureResultSet;
-	 
-
 		}catch (SQLException e) {
-		e.printStackTrace();
-		return futureResultSet;
-		}
-    
-}
-    
+			e.printStackTrace();
+			
+			}
+	return futureResultSet;
+        
+    }  
+   
+   /*//deleting the future result set
+   public int deleteServices(int bookingId) throws ClassNotFoundException {
+   	PreparedStatement preparedStatement = null;
+
+   	try {
+   		Class.forName("com.mysql.cj.jdbc.Driver");
+		    
+   		// Establish a database connection
+   		Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+   			  
+
+   	   
+   	    // Create a SQL DELETE query
+   	    String sql = "DELETE FROM vehicle_service WHERE booking_id = ?";
+
+   	    // Create a PreparedStatement
+   	    preparedStatement = conn.prepareStatement(sql);
+
+   	    // Set the parameter value (booking id)
+   	    preparedStatement.setInt(1, bookingId);
+
+   	    // Execute the DELETE query
+   	    int rowsAffected = preparedStatement.executeUpdate();
+   	    
+   	    
+   	    // Check the number of rows affected to determine if the delete was successful
+   	    conn.close();
+   	    return rowsAffected;
+   	}catch (SQLException e) {
+   	    e.printStackTrace();
+   	    return -1;
+   	} 
+   }*/
+   
 }

@@ -40,6 +40,8 @@
                 document.getElementById('phone').textContent = phone;
                 document.getElementById('address').textContent = country;
              
+             
+					
                             
             
                 

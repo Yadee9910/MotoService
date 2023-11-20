@@ -9,11 +9,12 @@
 
 <%
       MotoservicesDAO motoservicesDAO = new MotoservicesDAO();
-		String dbUrl = "jdbc:mysql://51.132.137.223:3306/isec_assessment2";
+		String dbUrl = "jdbc:mysql://172.187.178.153:3306/isec_assessment2";
 		String dbUser = "isec";
 		String dbPassword = "EUHHaYAmtzbv";
 		ResultSet pastResultSet = null;
 		ResultSet futureResultSet = null;
+		
 		
 		try {
 		    // Load the MySQL JDBC driver
@@ -21,10 +22,51 @@
 		    
 		    // Establish a database connection
 		    Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-		    pastResultSet = motoservicesDAO.getPastServices("syadeeshani@gmail.com",conn);
-			futureResultSet = motoservicesDAO.getFutureServices("syadeeshani@gmail.com",conn);
+		    //pastResultSet = motoservicesDAO.getPastServices("syadeeshani@gmail.com",conn);
+			//futureResultSet = motoservicesDAO.getFutureServices("syadeeshani@gmail.com",conn);
 			
-		     
+		    if (request.getParameter("pastRes") != null){
+		    	
+		    	 String userName = request.getParameter("usernameForStore1");
+		    	 System.out.println("Hello");
+		    	 System.out.println(userName);
+		    	 pastResultSet =motoservicesDAO.getPastServices(userName);
+		    	
+		    	
+		    }
+		    if (request.getParameter("futureRes") != null){
+		    	
+		    	 String userName = request.getParameter("usernameForStore2");
+		    	 System.out.println("Hello");
+		    	 System.out.println(userName);
+		    	 futureResultSet =motoservicesDAO.getFutureServices(userName);
+		    	
+		    	
+		    }
+		    
+		   /* if (request.getParameter("delete") != null){
+		    	
+		    	String bookingId = request.getParameter("bookingID");
+		    	
+		    	int id = Integer.parseInt(bookingId);
+		    	//System.out.println("Hello");
+		    	//out.println(bookingId);
+		    	//delete the row
+		    	int rowsAffected = motoservicesDAO.deleteServices(id);
+		    	
+		    	if (rowsAffected > 0) {
+		    		//refresh the site  
+		    		 response.sendRedirect(request.getRequestURI());
+			         
+			    }else if(rowsAffected == -1){
+			    	out.println("Error in the databse. Try again later");
+			    } else {
+			        out.println("No data found for the given booking ID");
+			    }
+		    	
+		    	
+		    } */
+		    
 		}catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			
@@ -45,8 +87,47 @@
 <script type="text/javascript"  src="../JS/moto.js"></script>
 </head>
 
+
 <body>
-<div class="past_reservation">
+
+<%@ include file="Navbar.jsp" %>
+
+				<!--  <div class="reservation_form">
+				<form class="form_reservation" method="post" id="resv_form" action="?showPast=true" onclick="document.getElementById('past').style.display='block'">
+				<input type="hidden" id="usernameForStore2" name="usernameForStore2" value="" >
+							              
+				<input type="submit" class="res" id="pastRes" name= "pastRes" value="Past Reservation" >
+				</form>
+				
+				<br>
+					<form class="form_reservation" method="post" id="resv_form" action="?showFuture=true" onclick="document.getElementById('future').style.display='block'"  >
+					
+						<input type="hidden" id="usernameForStore3" name="usernameForStore3" value="" >
+							              
+						<input type="submit" class="res" id="futureRes" name="futureRes" value= "Future Reservation" >
+					</form>
+				</div>
+				-->
+
+<div class="reservation_form">
+	<form class="past_reserv" method="post" id="resv_form" onclick="document.getElementById('past_reservation').style.display='block'"  >
+	<input type="hidden" id="usernameForStore1" name="usernameForStore1" value="" >
+    <input type="submit" class="res" id="pastRes" name="pastRes" value = "Past Reservation">
+    </form>
+
+    <br>
+	<form class="future_reserv" method="post" id="resv_form" onclick="document.getElementById('future_reservation').style.display='block'"  >
+	<input type="hidden" id="usernameForStore2" name="usernameForStore2" value="" >
+    <input type="submit" class="res" id="futureRes" name="futureRes" value="Future Reservation">
+    </form>
+</div>
+
+
+
+<br><br>
+
+
+<div id="past_reservation" class = "past_reservation">
 <h1>Past Reservations</h1>
 <hr>
 <table>
@@ -57,8 +138,7 @@
 		<th>Location</th>
 		<th>Vehicle No</th>
 		<th>Mileage</th>
-		<th>Message</th>
-		<th>Username</th>	
+		<th>Message</th>	
 	</tr>
 	
 	 <%
@@ -97,9 +177,11 @@
     %>
 </table>
 </div>
+
+
 <br><br>
 
-<div class="future_reservations">
+<div id="future_reservation" class="future_reservation">
 <h1>Future Reservations</h1>
 <hr>
 
@@ -112,17 +194,17 @@
 		<th>Vehicle No</th>
 		<th>Mileage</th>
 		<th>Message</th>
-		<th>Username</th>
 		<th>Delete</th>
 	</tr>
-	
+	 
 	<% 
+	  Date currentDate1 = new Date();
         if (futureResultSet != null) {
             while (futureResultSet.next()) {
             	
             	Date date = futureResultSet.getDate("date");
             	
-            	if(date.before(currentDate)){
+            	if(date.before(currentDate1)){
             		 continue;
             	}
                 int bookingId = futureResultSet.getInt("booking_id");
@@ -150,9 +232,24 @@
     %>
 
 </table>
----------------------------------------------------------------------
-</div>
 
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Getting data from localStorage
+        var username = localStorage.getItem('username');
+        console.log('Value retrieved: ' + username);
+
+        document.getElementById('pastRes').addEventListener('click', function () {
+            //console.log("Hello world");
+            document.getElementById('usernameForStore1').value = username;
+        });
+        document.getElementById('futureRes').addEventListener('click', function () {
+           // console.log("Hello world");
+            document.getElementById('usernameForStore2').value = username;
+        });
+    });
+</script>
 <script type="text/javascript"  src="../js/vehicleservice.js"></script>
 </body>
 </html>

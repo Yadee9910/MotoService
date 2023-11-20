@@ -21,7 +21,7 @@
 <title>MotoService_Service</title>
 <%
       MotoservicesDAO motoservicesDAO = new MotoservicesDAO();
-		String dbUrl = "jdbc:mysql://51.132.137.223:3306/isec_assessment2";
+		String dbUrl = "jdbc:mysql://172.187.178.153:3306/isec_assessment2";
 		String dbUser = "isec";
 		String dbPassword = "EUHHaYAmtzbv";
 		ResultSet pastResultSet = null;
@@ -100,8 +100,13 @@
 
 <div class="service_content">
 	  <label for="time" class="serv_select">Select a time * </label>
-  	  &emsp;
-  	  <input type="time" id="time" name="time" required="required">
+  	  &nbsp; &nbsp;
+  	  <select id="time" name="time" required="required">
+  	  		  <option selected>Time</option>
+  	  		   <option value="10:00 AM">10:00 AM</option>
+               <option value="11:00 AM">11:00 AM</option>
+               <option value="12:00 AM">12:00 AM</option>
+  	  </select>
 </div>
 <br>
 
@@ -170,10 +175,7 @@
 	
 </section>
 
-<section class="reservation">
 
-
-</section>
 
 
 <script>
