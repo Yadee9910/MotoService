@@ -54,10 +54,12 @@ th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color:green;
+  background-color:lightcoral;
   color: whitesmoke;
 }
-
+tr{
+	background-color: linen;
+}
 .delete {
   background-color: red;
   color: white;
