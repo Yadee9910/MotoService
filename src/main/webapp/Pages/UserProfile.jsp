@@ -41,8 +41,10 @@
         <input type="hidden" name="post_logout_redirect_uri" id="redirect_uri" value="">
         <input type="hidden" name="state" value="">
         <!-- Use JavaScript to set the post_logout_redirect_uri value and log it -->
-        <button type="button" onclick="logoutAndRedirect()">Logout</button>
+        <button type="submit" class="logout_btn" onclick="logoutAndRedirect()">Logout</button>
     </form>
+    
+    
 
     <script>
         function logoutAndRedirect() {
@@ -57,14 +59,6 @@
     </script>
 </div>
 
-
-
-
-
-
-
-
-  
   </div>
   
 </body>

@@ -49,3 +49,16 @@
 .profile_container #email{
 	color:blue;
 }
+
+.logout_btn{
+	font-size: 17px;
+	font-weight: 500;
+	padding : 15% 50% 15% 50%;
+	border-radius: 15px;
+	background-color: lightcoral;
+	color: white;
+	border-style:none;
+	margin-bottom: 7%;
+	cursor:pointer;
+	margin-right:15%;
+}
