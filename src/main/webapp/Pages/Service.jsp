@@ -6,7 +6,20 @@
 <%@ page import="java.io.InputStream, java.io.IOException" %>
 <%@ page import="java.util.Properties" %>
 	
+<%@ page import="java.io.FileInputStream, java.io.IOException, java.util.Properties" %>
 
+
+<% // Initialize a Properties object
+Properties properties = new Properties();
+
+//Load the properties file
+try {
+	 InputStream inputStream = application.getResourceAsStream("/WEB-INF/application.properties");
+	 properties.load(inputStream);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	} 
+%>
 			
 
 <!DOCTYPE html>

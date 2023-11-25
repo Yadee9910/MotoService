@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"   pageEncoding="ISO-8859-1"%>
+<%@ page import="java.io.FileInputStream, java.io.IOException, java.util.Properties" %>
+<%@ page import="java.io.InputStream, java.io.IOException" %>
 
 <%
 	
@@ -7,6 +9,16 @@
 	// Retrieve the 'session_state' parameter from the URL
 		String sessionState = request.getParameter("session_state");
 	
+		 // Initialize a Properties object
+	    Properties properties = new Properties();
+
+	    // Load the properties file
+	    try {
+	        InputStream inputStream = application.getResourceAsStream("/WEB-INF/application.properties");
+	        properties.load(inputStream);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 
 %>
 <!DOCTYPE html>
@@ -20,13 +32,15 @@
         // Function to make a POST request
         function makePostRequest() {
             // Define the URL
-            var url = 'https://api.asgardeo.io/t/motoservice/oauth2/token';
-
+            var url = '<%= properties.getProperty("tokenEndpoint") %>';
+            
             var code = encodeURIComponent('<%= code %>');
+            var state = encodeURIComponent('<%= sessionState %>');
             var sessionState = encodeURIComponent('<%= sessionState %>');
-            var client_Id = '3AKTbfxHDmCuPCBjH7PdOQlKQrMa';
-            var client_secret = 'MJrUI5WGgwPfY6zGhc6u1NNfN_vvDVNWKPF7VhfxAmsa';
-            var redirect_uri = 'http://localhost:8080/MotoService_VehicleReservation/Authorize.jsp';
+            localStorage.setItem('state', state);
+            var client_Id = '<%= properties.getProperty("client_id") %>';
+            var client_secret = '<%= properties.getProperty("client_secret") %>';
+            var redirect_uri = '<%= properties.getProperty("baseurl") %>'+ '/MotoService_VehicleReservation/Authorize.jsp';
 
             // Define the request body parameters
             var bodyParams = new URLSearchParams();

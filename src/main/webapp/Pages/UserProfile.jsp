@@ -1,4 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.io.FileInputStream, java.io.IOException, java.util.Properties" %>
+<%@ page import="java.io.InputStream, java.io.IOException" %>
+
+<% // Initialize a Properties object
+Properties properties = new Properties();
+
+//Load the properties file
+try {
+	 InputStream inputStream = application.getResourceAsStream("/WEB-INF/application.properties");
+	 properties.load(inputStream);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	} 
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +24,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript"  src="../JS/moto.js"></script>
     
+<script type="text/javascript">
 
+
+</script>
 </head>
 <body>
     <%@ include file="Navbar.jsp" %>
@@ -35,7 +53,7 @@
 
 
 <div class="logout">
-    <form id="logout-form" action="https://api.asgardeo.io/t/motoservice/oidc/logout" method="POST">
+    <form id="logout-form" action='<%= properties.getProperty("logoutURL") %>'method="POST">
         <input type="hidden" name="client_id" id="client_id" value="">
         <!-- Set post_logout_redirect_uri dynamically using JavaScript -->
         <input type="hidden" name="post_logout_redirect_uri" id="redirect_uri" value="">

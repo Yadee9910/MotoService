@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.io.FileInputStream, java.io.IOException, java.util.Properties" %>
+<%@ page import="java.io.InputStream, java.io.IOException" %>
+
+<% // Initialize a Properties object
+Properties properties = new Properties();
+
+//Load the properties file
+try {
+	 InputStream inputStream = application.getResourceAsStream("/WEB-INF/application.properties");
+	 properties.load(inputStream);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	} 
+%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +27,9 @@
 
 <body>
 <%@ include file="Navbar.jsp" %>
+
+
+	
 <div class="home_container">
 <img class="homebg" src="../Images/homebg07.avif">
 

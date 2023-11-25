@@ -1,12 +1,12 @@
-       const infoUrl ="https://api.asgardeo.io/t/motoservice/oauth2/userinfo";
-       const client_ID ='3AKTbfxHDmCuPCBjH7PdOQlKQrMa';
+    
+       /*const client_ID ='3AKTbfxHDmCuPCBjH7PdOQlKQrMa';
        const client_secret = 'MJrUI5WGgwPfY6zGhc6u1NNfN_vvDVNWKPF7VhfxAmsa';
        
        
-       const introspectionEndpointUrl = 'https://api.asgardeo.io/t/motoservice/oauth2/introspect ';
+       const introspectionEndpointUrl = 'https://api.asgardeo.io/t/motoservice/oauth2/introspect ';*/
         const accessToken = localStorage.getItem('access_token');
         const idToken = localStorage.getItem('id_token');
-        
+     	const infoUrl = "https://api.asgardeo.io/t/motoservice/oauth2/userinfo";
         if(accessToken && idToken){
         	
         var settings = {
