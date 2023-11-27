@@ -149,8 +149,8 @@ try {
 		<th>Date </th>
 		<th>Time</th>
 		<th>Location</th>
-		<th>Vehicle No</th>
 		<th>Mileage</th>
+		<th>Vehicle No</th>
 		<th>Message</th>	
 	</tr>
 	
@@ -204,8 +204,8 @@ try {
 		<th>Date </th>
 		<th>Time</th>
 		<th>Location</th>
-		<th>Vehicle No</th>
 		<th>Mileage</th>
+		<th>Vehicle No</th>
 		<th>Message</th>
 		<th>Delete</th>
 	</tr>
