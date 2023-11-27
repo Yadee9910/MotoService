@@ -1,10 +1,4 @@
-    
-       /*const client_ID ='3AKTbfxHDmCuPCBjH7PdOQlKQrMa';
-       const client_secret = 'MJrUI5WGgwPfY6zGhc6u1NNfN_vvDVNWKPF7VhfxAmsa';
-       
-       
-       const introspectionEndpointUrl = 'https://api.asgardeo.io/t/motoservice/oauth2/introspect ';*/
-        const accessToken = localStorage.getItem('access_token');
+		const accessToken = localStorage.getItem('access_token');
         const idToken = localStorage.getItem('id_token');
      	const infoUrl = "https://api.asgardeo.io/t/motoservice/oauth2/userinfo";
         if(accessToken && idToken){
@@ -30,22 +24,17 @@
                 var fullName = given_name + " " + family_name;
                 
                 localStorage.setItem('username', username);
-                
-                
+                               
                 document.getElementById('username').textContent = username;
                 document.getElementById('name').textContent = fullName;
                 document.getElementById('given_name').textContent = given_name;
                 document.getElementById('family_name').textContent = family_name;
                 document.getElementById('email').textContent = email;
                 document.getElementById('phone').textContent = phone;
-                document.getElementById('address').textContent = country;
-             
-             
-					
-                            
-            
-                
+                document.getElementById('address').textContent = country;                          					                                                      
             })
+            
+            
             .fail(function (jqXHR, textStatus, errorThrown) {
                 // Handle any errors here
                 console.error('Error:', errorThrown);
@@ -53,11 +42,13 @@
                 cnsole.log(errorThrown)
                 window.location.href = "Login.jsp";
             });
-            
+                      
             console.log(localStorage.getItem('username'));
-        }
+            
+       		 }
+       		 
         else{
         	window.location.href = "Login.jsp";	
-        }
+       		 }
                
               

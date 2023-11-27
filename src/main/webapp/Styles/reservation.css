@@ -10,106 +10,63 @@
   	 /* Add this line */
 }
 
-
 .res {
-  background-color:black;/* Green background color */
-  color: white;
-  padding: 15px 20px;
-  border: none;
-  border-radius: 15px;
-  cursor: pointer;
-  font-size: 17px;
+	  background-color:black;/* Green background color */
+	  color: white;
+	  padding: 15px 20px;
+	  border: none;
+	  border-radius: 15px;
+	  cursor: pointer;
+	  font-size: 17px;
 }
-
-/* Add this CSS to style the reservation tables */
-
-/*.past_reservation,
-.future_reservation {
-  margin-top: 5%;
-}*/
 
 .past_reservation h1,
 .future_reservation h1 {
-  font-size: 40px;
-  margin-bottom: 0%;
+	  font-size: 40px;
+	  margin-bottom: 0%;
 }
 
 .past_reservation hr,
 .future_reservation hr {
-  margin-bottom: 2rem;
-  width: 100%;
+	  margin-bottom: 2rem;
+	  width: 100%;
 }
 
 table {
-  border-collapse: collapse;
-  width: 100%;
+	  border-collapse: collapse;
+	  width: 100%;
 }
 
 th {
-  border: 1px solid grey;
-  padding: 10px;
+	  border: 1px solid grey;
+	  padding: 10px;
 }
 
 th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color:lightcoral;
-  color: whitesmoke;
+	  padding-top: 12px;
+	  padding-bottom: 12px;
+	  text-align: center;
+	  background-color:lightcoral;
+	  color: whitesmoke;
 }
+
 tr{
-	background-color: linen;
+		background-color: linen;
 }
+
 .delete {
-  background-color: red;
-  color: white;
-  padding: 14px 18px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-  border-radius: 25px;
+	  background-color: red;
+	  color: white;
+	  padding: 14px 18px;
+	  margin: 8px 0;
+	  border: none;
+	  cursor: pointer;
+	  width: 100%;
+	  opacity: 0.9;
+	  border-radius: 25px;
 }
 
 .delete:hover {
-  opacity: 1;
-  background-color: black;
+	  opacity: 1;
+	  background-color: black;
 }
-
-/* Add this CSS for the modal */
-/*.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: #474e5d;
-  padding-top: 50px;
-}
-
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto;
-  border: 1px solid #ddd;
-  width: 80%;
-}
-
-.close {
-  position: absolute;
-  right: 35px;
-  top: 15px;
-  font-size: 40px;
-  font-weight: bold;
-  color: #f1f1f1;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  cursor: pointer;
-}
-*/

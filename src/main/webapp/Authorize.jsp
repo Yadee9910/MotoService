@@ -3,13 +3,12 @@
 <%@ page import="java.io.InputStream, java.io.IOException" %>
 
 <%
-	
 		String code = request.getParameter("code");
-	
-	// Retrieve the 'session_state' parameter from the URL
+
+		// Retrieve the 'session_state' parameter from the URL
 		String sessionState = request.getParameter("session_state");
 	
-		 // Initialize a Properties object
+		// Initialize a Properties object
 	    Properties properties = new Properties();
 
 	    // Load the properties file
@@ -21,19 +20,22 @@
 	    }
 
 %>
+
 <!DOCTYPE html>
 <html>
+
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<meta charset="ISO-8859-1">
+	<meta charset="ISO-8859-1">
 </head>
+
 <body>
     <script type="text/javascript">
+    
         // Function to make a POST request
         function makePostRequest() {
-            // Define the URL
-            var url = '<%= properties.getProperty("tokenEndpoint") %>';
             
+            var url = '<%= properties.getProperty("tokenEndpoint") %>';           
             var code = encodeURIComponent('<%= code %>');
             var state = encodeURIComponent('<%= sessionState %>');
             var sessionState = encodeURIComponent('<%= sessionState %>');
@@ -41,9 +43,9 @@
             var client_Id = '<%= properties.getProperty("client_id") %>';
             var client_secret = '<%= properties.getProperty("client_secret") %>';
             var redirect_uri = '<%= properties.getProperty("baseurl") %>'+ '/MotoService_VehicleReservation/Authorize.jsp';
-
+            
             // Use CSRF protection by including a CSRF token
-            var csrfToken = '<%= session.getAttribute("csrfToken") %>';
+            var csrfToken = '<%= session.getAttribute("csrfToken") %>';    
             
             // Define the request body parameters
             var bodyParams = new URLSearchParams();
@@ -61,7 +63,8 @@
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                data: bodyParams.toString() // Convert bodyParams to a string
+             	// Convert bodyParams to a string
+                data: bodyParams.toString() 
             };
 
             // Make the POST request using jQuery AJAX
@@ -81,14 +84,14 @@
 
                     // Redirect to the login page or display an error message
                     window.location.href = "Pages/Login.jsp";
-                });
-
-
-                
+                });   
+            
         }
 
+        
         // Call the function to make the POST request
         makePostRequest();
-    </script>
+    </script>   
 </body>
+
 </html>
