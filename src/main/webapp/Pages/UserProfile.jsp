@@ -12,7 +12,7 @@
 			 properties.load(inputStream);
 			} catch (IOException e) {
 			    e.printStackTrace();
-			} 
+			} 						
 %>
 
 <!DOCTYPE html>
@@ -24,21 +24,24 @@
     <link rel="stylesheet"  href ="../Styles/user.css">
     <title>MotoService_UserProfile</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript"  src="../JS/moto.js"></script>
+   
+    <script type="text/javascript"  src="../JS/moto.js"></script>   
     <script type="text/javascript">
+			//set the globle parameters for authentication		
+			const client_Id = '<%= properties.getProperty("client_id") %>';			
+			const postLogoutRedirectUri = '<%= properties.getProperty("baseurl") %>' + '/MotoService_VehicleReservation/Pages/Login.jsp';						  
+			const idToken = localStorage.getItem('access_token');
+			const state = localStorage.getItem('state');
+					console.log(state);
+					document.getElementById('logout_btn').addEventListener('click', function () {
+					    document.getElementById("client_id").value = client_Id;
+					    document.getElementById("post_logout_redirect_uri").value = postLogoutRedirectUri;
+					    document.getElementById("state").value = state;
+					    document.getElementById("logout-form").submit();
+					    console.log("Form submitted");
+					});
 
-    const idToken = localStorage.getItem('access_token');
-	const state = localStorage.getItem('state');
-	console.log(state);
-			  document.getElementById("logout_btn").addEventListener('click', function () {
-			   document.getElementById("client-id").value = properties.getProperty("client_id");
-			   document.getElementById("post-logout-redirect-uri").value = properties.getProperty("postLogoutRedirectURI");
-			   document.getElementById("state").value = state;
-			   //clear all the local storage attributes
-			   localStorage.clear();
-			   document.getElementById("logout-form").submit();
-	});  
-    </script>
+	</script>
 </head>
 
 <body>
@@ -60,10 +63,10 @@
 		  </ul>
 		    
 			<div class="logout">
-			    <form id="logout-form" action='<%= properties.getProperty("logoutURL") %>'method="POST">
+			    <form id="logout-form" action='<%= properties.getProperty("logoutEndpoint") %>'method="POST">
 			        <input type="hidden" name="client_id" id="client_id" value="">		       
 			        <input type="hidden" name="post_logout_redirect_uri" id="post_logout_redirect_uri" value="">
-			        <input type="hidden" name="state" value="">
+			        <input type="hidden" name="state" id="state" value="">
 			        <!-- Use JavaScript to set the post_logout_redirect_uri value and log it -->
 			        <button type="submit" id="logout_btn" class="logout_btn">Logout</button>
 			    </form>     
