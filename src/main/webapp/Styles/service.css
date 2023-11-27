@@ -23,6 +23,7 @@
 .service_content input[type="date"],
 .service_content input[type="text"],
 .service_content input[type="time"],
+.service_content input[type="number"],
 .service_content select {
 	padding:5px;
 	font-size: 15px;

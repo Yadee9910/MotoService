@@ -100,7 +100,7 @@
 			<div class="service_content">
 			    <label for="date" class="serv_select">Date *</label>
 		  	    &emsp;&emsp;&emsp;&emsp;&nbsp;
-		  	    <input type="date" id="date" name="date" required="required">
+		  	    <input type="date" id="date" name="date" min="<%= java.time.LocalDate.now()%>" required="required">
 			</div>
 			<br>  
 	
@@ -160,7 +160,7 @@
 			<div class="service_content">
 				<label for="mileage" class="serv_select">Mileage *</label>
 				&emsp;&emsp;&nbsp;&nbsp;&nbsp;
-				<input type="text" class="form-control" name="mileage" id="mileage"  placeholder="Total mileage" required="required">
+				<input type="number" step="1" min="1" pattern="\d+" class="form-control" name="mileage" id="mileage"  placeholder="Total mileage" required="required">
 			</div>
 			<br>
 		                	            

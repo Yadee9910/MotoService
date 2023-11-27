@@ -25,18 +25,20 @@
     <title>MotoService_UserProfile</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript"  src="../JS/moto.js"></script>
-    
-	  <script>	     
-	        const redirectUri = window.location.origin + '/MotoService_VehicleReservation/Login.jsp';
-	
-	        function logoutAndRedirect() {
-	            // Set the post_logout_redirect_uri dynamically
-	            document.getElementById('redirect_uri').value = redirectUri;
-	
-	            // Submit the form
-	            document.getElementById('logout-form').submit();
-	        }
-	  </script>
+    <script type="text/javascript">
+
+    const idToken = localStorage.getItem('access_token');
+	const state = localStorage.getItem('state');
+	console.log(state);
+			  document.getElementById("logout_btn").addEventListener('click', function () {
+			   document.getElementById("client-id").value = properties.getProperty("client_id");
+			   document.getElementById("post-logout-redirect-uri").value = properties.getProperty("postLogoutRedirectURI");
+			   document.getElementById("state").value = state;
+			   //clear all the local storage attributes
+			   localStorage.clear();
+			   document.getElementById("logout-form").submit();
+	});  
+    </script>
 </head>
 
 <body>
@@ -60,10 +62,10 @@
 			<div class="logout">
 			    <form id="logout-form" action='<%= properties.getProperty("logoutURL") %>'method="POST">
 			        <input type="hidden" name="client_id" id="client_id" value="">		       
-			        <input type="hidden" name="post_logout_redirect_uri" id="redirect_uri" value="">
+			        <input type="hidden" name="post_logout_redirect_uri" id="post_logout_redirect_uri" value="">
 			        <input type="hidden" name="state" value="">
 			        <!-- Use JavaScript to set the post_logout_redirect_uri value and log it -->
-			        <button type="submit" class="logout_btn" onclick="logoutAndRedirect()">Logout</button>
+			        <button type="submit" id="logout_btn" class="logout_btn">Logout</button>
 			    </form>     
 			</div>
   	    </div>
