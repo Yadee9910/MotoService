@@ -82,11 +82,11 @@ Time time= null;
             // Set the parameter values
             preparedStatement.setDate(1, new java.sql.Date(date.getTime())); // Current date
             preparedStatement.setTime(2, time); // Current time
-            preparedStatement.setString(3, location);
+            preparedStatement.setString(3, escapeHtml(location));
             preparedStatement.setInt(4, mileage);
-            preparedStatement.setString(5, vehicle_no);
-            preparedStatement.setString(6, message);
-            preparedStatement.setString(7, userName);
+            preparedStatement.setString(5, escapeHtml(vehicle_no));
+            preparedStatement.setString(6, escapeHtml(message));
+ 	        preparedStatement.setString(7, escapeHtml(userName));
             
             // Execute the INSERT statement
             int rowsInserted = preparedStatement.executeUpdate();
@@ -116,9 +116,7 @@ try {
 	
 // Create a SQL SELECT query for past reservations
 String pastSql = "SELECT * FROM vehicle_service WHERE username = ? AND CONCAT(date, ' ', time) < ? ORDER BY date, time";
-
 PreparedStatement pastPreparedStatement = conn.prepareStatement(pastSql);
-
 pastPreparedStatement.setString(1, username);
 
 // Set the parameter value (current date and time)
@@ -212,5 +210,14 @@ return pastResultSet;
    	    return -1;
    	} 
    }
-   
+   private String escapeHtml(String input) {
+       if (input == null) {
+           return "";
+       }
+       return input.replace("&", "&amp;")
+                   .replace("<", "&lt;")
+                   .replace(">", "&gt;")
+                   .replace("\"", "&quot;")
+                   .replace("'", "&#39;");
+   }
 }

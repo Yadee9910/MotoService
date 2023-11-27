@@ -67,8 +67,9 @@ try {
 		        // Convert mileage to an integer
 		        int rowsInserted =  motoservicesDAO.insertService(location,  mileageStr, vehicle_no,  message,  userName,  dateStr,  timeStr, conn);
 		        if (rowsInserted > 0) {
-		         	out.println("Data inserted successfully.");
-		             response.sendRedirect(request.getRequestURI());
+		        	out.println("Data inserted successfully. Redirecting...");
+		        	response.sendRedirect(request.getRequestURI());
+
 		             
 		         }else if(rowsInserted == -1){
 		        	 out.println("Invalid time format. Please enter time in hh:mm format.");

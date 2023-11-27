@@ -24,10 +24,18 @@ try {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript"  src="../JS/moto.js"></script>
     
-<script type="text/javascript">
+  <script>
+        // Always use 'let' or 'const' instead of 'var'
+        const redirectUri = window.location.origin + '/MotoService_VehicleReservation/Login.jsp';
 
+        function logoutAndRedirect() {
+            // Set the post_logout_redirect_uri dynamically
+            document.getElementById('redirect_uri').value = redirectUri;
 
-</script>
+            // Submit the form
+            document.getElementById('logout-form').submit();
+        }
+    </script>
 </head>
 <body>
     <%@ include file="Navbar.jsp" %>
@@ -64,7 +72,7 @@ try {
     
     
 
-    <script>
+   /<!--  <script>
         function logoutAndRedirect() {
             // Set the post_logout_redirect_uri dynamically     
             var redirectUri = window.location.origin + './Login.jsp';
@@ -74,7 +82,7 @@ try {
             // Submit the form
             document.getElementById('logout-form').submit();
         }
-    </script>
+    </script>--> 
 </div>
 
   </div>

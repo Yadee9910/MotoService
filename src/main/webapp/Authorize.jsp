@@ -42,6 +42,9 @@
             var client_secret = '<%= properties.getProperty("client_secret") %>';
             var redirect_uri = '<%= properties.getProperty("baseurl") %>'+ '/MotoService_VehicleReservation/Authorize.jsp';
 
+            // Use CSRF protection by including a CSRF token
+            var csrfToken = '<%= session.getAttribute("csrfToken") %>';
+            
             // Define the request body parameters
             var bodyParams = new URLSearchParams();
             bodyParams.append('code', code);
@@ -49,7 +52,9 @@
             bodyParams.append('client_id', client_Id);
             bodyParams.append('client_secret', client_secret);
             bodyParams.append('redirect_uri', redirect_uri);
-
+            bodyParams.append('state', state);
+            bodyParams.append('csrfToken', csrfToken);
+            
             // Define the request options
             var requestOptions = {
                 method: 'POST',
@@ -72,7 +77,7 @@
                 })	
                 .fail(function (xhr, textStatus, errorThrown) {
                     // Log the details of the error
-                   console.error('Error:', error);
+                   console.error('Error:',  errorThrown);
 
                     // Redirect to the login page or display an error message
                     window.location.href = "Pages/Login.jsp";
